@@ -1,0 +1,4 @@
+- mars: !ruby/range 1..10
+- jupiter: !ruby/range 1..10
+- venus: !ruby/range 1..10
+
