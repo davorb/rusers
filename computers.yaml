@@ -10,4 +10,3 @@
 - falk: !ruby/range 1..12
 - varg: !ruby/range 1..12
 - lo: !ruby/range 1..10
-
