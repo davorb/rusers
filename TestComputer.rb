@@ -20,7 +20,7 @@ class TestComputer < Test::Unit::TestCase
   end
 
   def test_poll_offline_computer
-    assert_equal @dontexist.get_users, nil
+    assert_equal @dontexist.users, nil
   end
 
   def test_bad_hostname
