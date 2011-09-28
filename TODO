@@ -1,0 +1,5 @@
+* Add ability to auto-add to known_hosts
+* Add ability to manually enter password, so that you don't have to
+   use known_hosts
+* Filter out idle users
+* Add ability to finger
