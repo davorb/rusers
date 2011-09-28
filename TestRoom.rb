@@ -19,6 +19,6 @@ class TestRoom < Test::Unit::TestCase
   end
 
   def test_to_s
-    assert_equal "mars-1..10", @room.to_s
+    assert_equal "mars", @room.to_s
   end
 end
