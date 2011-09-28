@@ -28,9 +28,12 @@ module Rusers
   # and print_users_in room. In desperate need
   # of refactoring
   def self.print_all_users_everywhere
+    puts "Listing all users..."
     conf = Rusers.parse_yaml
-    conf.each do |h|
-      h.each_key { |k| print_all_users_in_room k unless k.nil? }
+    conf.each do |h|      
+      h.each_key do |k| 
+        print_all_users_in_room k unless k.nil?
+      end
     end
   end
 
@@ -43,10 +46,7 @@ module Rusers
 
     room = Room.new room_conf.keys[0], room_conf.values[0]
 
-    room.users.each do |user|
-      # TODO: add location
-      puts "#{user}" unless user.nil?
-    end
+    puts room.users
   end
 end
 

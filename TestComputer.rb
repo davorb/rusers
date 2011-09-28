@@ -15,12 +15,8 @@ class TestComputer < Test::Unit::TestCase
     assert_equal 1, @mars1.number
   end
 
-  def test_idle_user_not_logged_in
-    assert_raise( RuntimeError ) { @mars1.idle "idontexist" }
-  end
-
   def test_poll_offline_computer
-    assert_equal @dontexist.users, nil
+    assert_equal [], @dontexist.users
   end
 
   def test_bad_hostname
@@ -28,7 +24,7 @@ class TestComputer < Test::Unit::TestCase
     assert_raise ( RuntimeError ) { Computer.new 10..20 }
   end
 
-  def test_get_users_returns_user
-    assert_instance_of User, @mars1.users
+  def test_get_users_returns_array
+    assert_instance_of Array, @mars1.users
   end
 end

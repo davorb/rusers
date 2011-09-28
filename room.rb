@@ -14,9 +14,10 @@ class Room
   end
 
   def to_s
-    "#{@name}-#{@range}"
+    @name
   end
 
+  # Returns an array of computers
   def users
     results = Array.new
     @computers.each do |computer|
