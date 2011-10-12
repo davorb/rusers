@@ -22,11 +22,15 @@ class Computer
     username = if $u
                  $u
                elsif Rusers.is_user?(`logname`)
-                 `logname`
+                 `logname`.split.join("\n")
                else
                  "dt08db2"
                end
-    remote_command = "ssh #{username}@login.student.lth.se ssh -o StrictHostKeyChecking=no -q #{@hostname} #{command}"
+    unless Rusers.is_user?(`logname`)
+      remote_command = "ssh #{username}@login.student.lth.se ssh -o StrictHostKeyChecking=no -q #{@hostname} #{command}"
+    else
+      remote_command = "ssh -o StrictHostKeyChecking=no -q #{@hostname} #{command}"
+    end
     tmp  = IO.popen remote_command
     lines = tmp.read
     return [] if lines.size == 0
