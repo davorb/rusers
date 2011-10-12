@@ -14,12 +14,4 @@ class User
       "#{@hostname}: #{@name}"
     end
   end
-
-  def idle
-
-  end
-
-  def full_name
-    
-  end
 end

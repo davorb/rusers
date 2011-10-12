@@ -19,10 +19,6 @@ class TestUser < Test::Unit::TestCase
     assert_equal "dt08db", @existing_user.to_s
   end
 
-  def test_full_name
-    assert_equal "Davor Babic", @existing_user.full_name
-  end
-
   def test_full_name_user_doesnt_exist
     assert_raise( RuntimeError ) { @nonexisting_user.full_name }
   end
