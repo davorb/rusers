@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby -s
+#!/usr/bin/ruby -s
 
 require "./util.rb"
 include Rusers
