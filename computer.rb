@@ -18,7 +18,15 @@ class Computer
   def users
     users = Array.new
     command = "who"
-    remote_command = "ssh dt08db2@login.student.lth.se ssh -o StrictHostKeyChecking=no -q #{@hostname} #{command}"
+
+    username = if $u
+                 $u
+               elsif Rusers.is_user?(`logname`)
+                 `logname`
+               else
+                 "dt08db2"
+               end
+    remote_command = "ssh #{username}@login.student.lth.se ssh -o StrictHostKeyChecking=no -q #{@hostname} #{command}"
     tmp  = IO.popen remote_command
     lines = tmp.read
     return [] if lines.size == 0
