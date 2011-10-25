@@ -11,4 +11,4 @@
 - varg: !ruby/range 1..12
 - lo: !ruby/range 1..10
 - backus: !ruby/range 1..12
-- newton: !ruby/range 1..12
+#- newton: !ruby/range 1..12
