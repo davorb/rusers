@@ -18,6 +18,9 @@ else
       Rusers.print_all_users_in_room arg
     elsif arg.eql? "-e"
       Rusers.print_all_users_everywhere
+    elsif arg.eql? "last"
+      puts "Printing last..."
+      Rusers.print_last
     else
       puts "Unknown argument: #{arg}."
     end

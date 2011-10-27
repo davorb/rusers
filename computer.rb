@@ -15,9 +15,30 @@ class Computer
     @hostname
   end
 
+  def last
+    output = Array.new
+    command="last"
+    username = if $u
+                 $u
+               elsif Rusers.is_user?(`logname`)
+                 `logname`.split.join("\n")
+               else
+                 "dt08db2"
+               end
+    unless Rusers.is_user?(`logname`)
+      remote_command = "ssh #{username}@login.student.lth.se ssh -o StrictHostKeyChecking=no -q #{@hostname} #{command}"
+    else
+      remote_command = "ssh -o StrictHostKeyChecking=no -q #{@hostname} #{command}"
+    end
+    tmp  = IO.popen remote_command
+    lines = tmp.read
+    return [] if lines.size == 0
+    lines
+  end
+
   def users
+    command="who"
     users = Array.new
-    command = "who"
 
     username = if $u
                  $u

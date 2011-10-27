@@ -52,4 +52,20 @@ module Rusers
 
     puts room.users
   end
+
+  def print_last
+    conf = Rusers.parse_yaml
+    conf.each do |h|      
+      h.each_key do |room| 
+        room_conf = nil
+        conf = Rusers.parse_yaml
+        conf.each do |h|
+          room_conf = h if room.eql?h.keys[0]
+        end
+        
+        room = Room.new room_conf.keys[0], room_conf.values[0]
+        room.all_last.each { |i| puts i }
+      end
+    end
+  end
 end

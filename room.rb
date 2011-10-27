@@ -30,4 +30,17 @@ class Room
     end
     results
   end
+
+  def all_last
+    results = Array.new
+    @computers.each do |computer|
+      Thread.new do
+        results << computer.last unless computer.nil?
+      end
+    end
+    Thread.list.each do |t| 
+      t.join unless t == Thread.current or t == Thread.main
+    end
+    results
+  end
 end
