@@ -32,6 +32,7 @@ class Computer
     end
     tmp  = IO.popen remote_command
     lines = tmp.read
+    lines << "from #{@hostname}"
     return [] if lines.size == 0
     lines
   end
