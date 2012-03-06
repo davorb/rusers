@@ -31,8 +31,13 @@ class TestParseW < Test::Unit::TestCase
   end
 
   def test_ignore_idle_users
+    # in this case, the idle user has been idle for "5days"
     result = ParseW.parse Input_three_users, My_user_name, true
     assert_equal ["dt05tl3", "dt08do6"], result
+  end
+
+  def test_ignore_idle_users_various_time_formats
+    # TODO: write
   end
 end
 
