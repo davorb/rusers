@@ -11,7 +11,6 @@ class TestParseW < Test::Unit::TestCase
 
   def test_no_user_name
     result = ParseW.parse Input_just_me
-
     assert_equal ["dt08db2"], result
   end
 
@@ -23,14 +22,17 @@ class TestParseW < Test::Unit::TestCase
 
   def test_one_user
     result = ParseW.parse Input_one_user, My_user_name
-
     assert_equal ["pi05an1"], result
   end
 
   def test_three_users
     result = ParseW.parse Input_three_users, My_user_name
-
     assert_equal ["dt05tl3", "dt07ca7", "dt08do6"], result
+  end
+
+  def test_ignore_idle_users
+    result = ParseW.parse Input_three_users, My_user_name, true
+    assert_equal ["dt05tl3", "dt08do6"], result
   end
 end
 
