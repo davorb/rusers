@@ -15,6 +15,19 @@ class ConfigReader
   end
 
   def computers
-    # TODO: write
+    answer = Array.new
+    @conf.each do |c|
+      answer.concat parse_rooms(c.keys[0], c.values[0])
+    end
+    answer
+  end
+
+  private
+  def parse_rooms (name, range)
+    computers = Array.new
+    range.each do |i|
+      computers << "#{name}-#{i}"
+    end
+    computers
   end
 end
