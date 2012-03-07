@@ -6,7 +6,7 @@ module ParseW
   #
   # After that it splits each line, and adds the first
   # part (the user name) to "users"
-  def self.parse (input, user_name="", ignore_idle=false)
+  def self.parse (input, ignore_idle=false, user_name="")
     lines = Array.new
     users = Array.new
     input.each_line { |l| lines << l }
@@ -15,7 +15,6 @@ module ParseW
     if ignore_idle
       lines.delete_if { |l| l =~ /days/ }
     end
-
     lines.each { |l| users << l.split[0] }
     users.delete user_name
     users

@@ -5,7 +5,7 @@ class TestParseW < Test::Unit::TestCase
   My_user_name = "dt08db2"
 
   def test_empty_string
-    result = ParseW.parse "", My_user_name
+    result = ParseW.parse "", false, My_user_name
     assert_equal [], result
   end
 
@@ -15,25 +15,31 @@ class TestParseW < Test::Unit::TestCase
   end
 
   def test_just_me
-    result = ParseW.parse Input_just_me, My_user_name
+    result = ParseW.parse Input_just_me, false, My_user_name
 
     assert_equal [], result
   end
 
   def test_one_user
-    result = ParseW.parse Input_one_user, My_user_name
+    result = ParseW.parse Input_one_user, false, My_user_name
     assert_equal ["pi05an1"], result
   end
 
   def test_three_users
-    result = ParseW.parse Input_three_users, My_user_name
+    result = ParseW.parse Input_three_users, false, My_user_name
     assert_equal ["dt05tl3", "dt07ca7", "dt08do6"], result
   end
 
   def test_ignore_idle_users
     # in this case, the idle user has been idle for "5days"
-    result = ParseW.parse Input_three_users, My_user_name, true
+    result = ParseW.parse Input_three_users, true, My_user_name
     assert_equal ["dt05tl3", "dt08do6"], result
+  end
+
+  def test_two_idle_users
+    # both users have been idle for days
+    result = ParseW.parse Input_two_idle_users, true, "dt08db2"
+    assert_equal [], result
   end
 
   def test_ignore_idle_users_various_time_formats
@@ -65,3 +71,10 @@ dt07ca7  pts/6    uglybob.df.lth.s 28Feb12  5days  0.17s  0.17s -zsh
 dt08do6  pts/7    h51bafa4a.seluti 10:47    3:40m  0.10s  0.01s ssh linus.lab.e
 STRING
 
+Input_two_idle_users = <<STRING
+ 10:16:25 up 14 days, 22:11,  3 users,  load average: 0.17, 0.06, 0.06
+USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT
+adi10col tty8     :0               23Feb12 14days  5:24m  0.62s gnome-session -
+dt08db2  pts/0    login.student.lt 10:16    0.00s  0.25s  0.00s w
+geo10jk1 tty9     :5               27Feb12 14days  9:49   0.63s gnome-session -
+STRING

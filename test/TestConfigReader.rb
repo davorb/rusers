@@ -1,4 +1,4 @@
-require "../Config.rb"
+require "../ConfigReader.rb"
 require "test/unit"
 
 class TestConfigReader < Test::Unit::TestCase
