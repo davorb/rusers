@@ -1,0 +1,3 @@
+- dog: !ruby/range 1..1
+- cat: !ruby/range 1..3
+- house: !ruby/range 0..1
