@@ -1,4 +1,5 @@
 require "yaml"
+require "./Computer.rb"
 
 class ConfigReader
   def initialize (file_name)
@@ -26,7 +27,7 @@ class ConfigReader
   def parse_rooms (name, range)
     computers = Array.new
     range.each do |i|
-      computers << "#{name}-#{i}"
+      computers << Computer.new(name, i)
     end
     computers
   end
