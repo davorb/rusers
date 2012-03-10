@@ -1,4 +1,4 @@
-require "../Connection.rb"
+require "./Connection.rb"
 require "test/unit.rb"
 
 class TestConnection < Test::Unit::TestCase

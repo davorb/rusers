@@ -1,5 +1,6 @@
 require "yaml"
 require "./Computer.rb"
+require "./Room.rb"
 
 class ConfigReader
   def initialize (file_name)
@@ -10,7 +11,9 @@ class ConfigReader
   def rooms
     rooms = Array.new
     @conf.each do |c|
-      rooms << c.keys[0]
+      room = Room.new c.keys[0]
+      room.number_of_computers = c.values[0].end-c.values[0].begin+1
+      rooms << room
     end
     rooms
   end

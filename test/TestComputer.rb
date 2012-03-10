@@ -1,4 +1,4 @@
-require "../Computer.rb"
+require "./Computer.rb"
 require "test/unit"
 
 class TestComputer < Test::Unit::TestCase

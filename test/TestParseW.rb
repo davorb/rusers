@@ -1,4 +1,4 @@
-require "../ParseW.rb"
+require "./ParseW.rb"
 require "test/unit"
 
 class TestParseW < Test::Unit::TestCase
