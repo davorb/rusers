@@ -13,8 +13,9 @@ class Connection
 
   def to_s
     tmp = IO.popen @ssh_command
-    tmp.read
+    a = tmp.read
     tmp.close
+    a
   end
 
   def command= (c)
