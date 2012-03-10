@@ -24,18 +24,26 @@ def check_computer computer
   # mars: [mars-1]
   if result.size > 0
     REDIS.sadd computer.room, computer
-    REDIS.expireat computer, 900
-    puts "added"
+    #REDIS.expireat computer.room, 900
+    puts "added result: #{result} to computer #{computer} in room #{computer.room}. #{result.class}"
   else
     REDIS.srem computer.room, computer
   end
-  puts "#{computer}: #{result} <> result.size: #{result.size}" unless result.size == 0
+#  puts "#{computer}: #{result} <> result.size: #{result.size}" #unless result.size == 0
 end
 
 config = ConfigReader.new "computers.yaml"
-config.computers.each do |computer|
-  check_computer computer
+while true do
+  puts "begin"
+  threads = []
+  config.computers.each do |computer|
+    threads << Thread.new do
+      check_computer computer
+    end
+    if Thread.list.size > 9
+      threads.each { |t| t.join }
+    end
+  end
+  puts "sleep..."
+  sleep 5
 end
-
-
-#smembers
