@@ -18,6 +18,11 @@ class TestParseW < Test::Unit::TestCase
     result = ParseW.parse Someone_logged_in
     assert_equal "et08vr6", result
   end
+
+  def test_logged_in_wrong_day
+    result = ParseW.parse Logged_in_wrong_day
+    assert_equal "", result
+  end
 end
 
 No_one_logged_in = <<TEXT
@@ -26,4 +31,8 @@ TEXT
 
 Someone_logged_in = <<TEXT
 et08vr6  tty10        Sun Mar 11 15:29   still logged in   
+TEXT
+
+Logged_in_wrong_day = <<TEXT
+et08vr6  tty10        Sun Mar 99 15:29   still logged in   
 TEXT
