@@ -10,12 +10,12 @@ class TestConnection < Test::Unit::TestCase
     assert_equal "mars-1", @c.host_name
     assert_equal "dt08db2", @c.user_name
     assert_equal "login.student.lth.se", @c.tunnel
-    assert_equal "w", @c.command
+    assert_equal "last -R|head -n 1", @c.command
   end
 
   def test_connect_to_server
     lines = Array.new
-    conn = Connection.new "login.student.lth.se"
+    conn = Connection.new "login.student.lth.se", "w"
     result = conn.to_s
     result.each_line { |l| lines << l }
     assert_equal Second_line, lines[1]

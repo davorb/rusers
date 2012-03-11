@@ -5,76 +5,25 @@ class TestParseW < Test::Unit::TestCase
   My_user_name = "dt08db2"
 
   def test_empty_string
-    result = ParseW.parse "", false, My_user_name
-    assert_equal [], result
+    result = ParseW.parse ""
+    assert_equal "", result
   end
 
-  def test_no_user_name
-    result = ParseW.parse Input_just_me
-    assert_equal ["dt08db2"], result
+  def test_no_one_logged_in
+    result = ParseW.parse No_one_logged_in
+    assert_equal "", result
   end
 
-  def test_just_me
-    result = ParseW.parse Input_just_me, false, My_user_name
-
-    assert_equal [], result
-  end
-
-  def test_one_user
-    result = ParseW.parse Input_one_user, false, My_user_name
-    assert_equal ["pi05an1"], result
-  end
-
-  def test_three_users
-    result = ParseW.parse Input_three_users, false, My_user_name
-    assert_equal ["dt05tl3", "dt07ca7", "dt08do6"], result
-  end
-
-  def test_ignore_idle_users
-    # in this case, the idle user has been idle for "5days"
-    result = ParseW.parse Input_three_users, true, My_user_name
-    assert_equal ["dt05tl3", "dt08do6"], result
-  end
-
-  def test_two_idle_users
-    # both users have been idle for days
-    result = ParseW.parse Input_two_idle_users, true, "dt08db2"
-    assert_equal [], result
-  end
-
-  def test_ignore_idle_users_various_time_formats
-    # TODO: write
+  def test_logged_in
+    result = ParseW.parse Someone_logged_in
+    assert_equal "et08vr6", result
   end
 end
 
-# These are the input strings used for the test cases
-Input_just_me = <<STRING
- 14:21:29 up 6 days,  6:16,  1 user,  load average: 0.08, 0.03, 0.05
-USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT
-dt08db2  pts/0    login.student.lt 14:21    0.00s  0.25s  0.00s w
-STRING
+No_one_logged_in = <<TEXT
+dt08db2  pts/4        Sun Mar 11 16:47 - 16:49  (00:02)    
+TEXT
 
-
-Input_one_user = <<STRING
- 14:21:29 up 6 days,  6:16,  1 user,  load average: 0.08, 0.03, 0.05
-USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT
-dt08db2  pts/0    login.student.lt 14:21    0.00s  0.25s  0.00s w
-pi05an1  pts/0    login.student.lt 14:21    0.00s  0.25s  0.00s w
-STRING
-
-Input_three_users = <<STRING
- 14:28:08 up 66 days, 21:39,  4 users,  load average: 0.00, 0.01, 0.05
-USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT
-dt05tl3  pts/3    80.78.212.27:S.0 01Jan12 21:07  11:09  11:09  irssi
-dt08db2  pts/4    109-104-30-107.c 14:19    0.00s  0.16s  0.00s w
-dt07ca7  pts/6    uglybob.df.lth.s 28Feb12  5days  0.17s  0.17s -zsh
-dt08do6  pts/7    h51bafa4a.seluti 10:47    3:40m  0.10s  0.01s ssh linus.lab.e
-STRING
-
-Input_two_idle_users = <<STRING
- 10:16:25 up 14 days, 22:11,  3 users,  load average: 0.17, 0.06, 0.06
-USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT
-adi10col tty8     :0               23Feb12 14days  5:24m  0.62s gnome-session -
-dt08db2  pts/0    login.student.lt 10:16    0.00s  0.25s  0.00s w
-geo10jk1 tty9     :5               27Feb12 14days  9:49   0.63s gnome-session -
-STRING
+Someone_logged_in = <<TEXT
+et08vr6  tty10        Sun Mar 11 15:29   still logged in   
+TEXT

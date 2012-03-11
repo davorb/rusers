@@ -1,7 +1,9 @@
 class Connection
   attr_reader :host_name, :user_name, :command, :tunnel, :ssh_command
 
-  def initialize (host_name, command="w", user_name="dt08db2", 
+  def initialize (host_name, 
+                  command="last -R|head -n 1", 
+                  user_name="dt08db2", 
                   tunnel="login.student.lth.se")
     @host_name = host_name
     @user_name = user_name
